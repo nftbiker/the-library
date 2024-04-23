@@ -9,9 +9,8 @@ end
 require "active_support/all"
 require 'json'
 
-STORAGE = "./storage"
-JSON_PATH = File.join(STORAGE, "/json")
-MD_PATH = File.join(STORAGE, "/markdown")
+JSON_PATH = "./_json"
+MD_PATH = "./_posts"
 TIME_FMT = "%Y-%m-%dT%H:%M:%S%z"
 
 class Warpcast
@@ -43,8 +42,11 @@ class Warpcast
       end
 
       # no image, no love
-      images = (cast['embeds'] || {})['images'] || []
-      next if images.blank? && casts.blank?
+      images = ((cast['embeds'] || {})['images'] || []).collect { |e|
+        next if e['type'] != 'image'
+        (e['media'] || {})['staticRaster'] || e['url'] || e['sourceUrl']
+      }.compact
+      next if images.blank?
 
       # what we memoize
       res = {
@@ -56,18 +58,15 @@ class Warpcast
           fid: cast['author']['fid'],
         }.stringify_keys,
         text: cast['text'],
-        images: []
+        images: images
       }
-      images.each do |e|
-        next if e['type'] != 'image'
-        val = (e['media'] || {})['staticRaster'] || e['url'] || e['sourceUrl']
-        res[:images] << val
-      end
+
       res.stringify_keys!
       save_json(res)
       save_markdown(res)
       casts[res['id']] = res
     end
+
     if list.size>=15
       from = list.last['timestamp']
       return call(options.merge(from: from)) if from/1000>upto
@@ -85,18 +84,20 @@ class Warpcast
   end
 
   def save_markdown(entry)
-    k = "#{entry['timestamp'].to_i/1000}_#{entry['id'][0,8]}"
-    path = File.join(MD_PATH, "#{k}.md")
+    d = Time.at(entry['timestamp'].to_i/1000).strftime('%Y-%m-%d')
+    id = entry['id'][0,10]
+    path = File.join(MD_PATH, "#{d}-#{id}.md")
     return path if File.exist?(path)
     author = entry['author']
     front = []
     front << "---"
-    front << "date: #{Time.at(entry['timestamp']/1000).strftime(TIME_FMT)}"
     front << "author: #{author['displayname']}"
+    front << "date: #{Time.at(entry['timestamp']/1000).strftime(TIME_FMT)}"
     front << "username: #{author['username']}"
     front << "fid: #{author['fid']}"
     front << "cast_id: #{entry['id']}"
-    front << "cast: https://warpcast.com/#{author['username']}/#{entry['id'].to_s[0,10]}"
+    front << "cast: https://warpcast.com/#{author['username']}/#{id}"
+    front << "layout: post"
     front << "---"
     front << ""
 
@@ -125,4 +126,6 @@ class Warpcast
   end
 end
 
-Warpcast.new.call
+if $0 == __FILE__
+  Warpcast.new.call
+end

@@ -1,4 +1,5 @@
 A ruby script to download all entries from "The Library" channel and keep a copy in json and markdown format.
+The script is automatically run through a github actions to update the repository with new posts, twice a day.
 
 # How to run
 
