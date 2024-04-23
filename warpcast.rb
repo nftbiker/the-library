@@ -74,6 +74,16 @@ class Warpcast
     casts
   end
 
+  def reprocess
+    # reprocess all json entries to save new markdown version
+    Dir.glob("#{JSON_PATH}/*.json").each do |f|
+      puts f
+      res = JSON.parse(File.read(f))
+      save_markdown(res)
+    end
+    true
+  end
+
   private
 
   def save_json(entry)
@@ -84,7 +94,7 @@ class Warpcast
   end
 
   def save_markdown(entry)
-    d = Time.at(entry['timestamp'].to_i/1000).strftime('%Y-%m-%d')
+    d = Time.at(entry['timestamp'].to_i/1000).strftime('%Y-%m-%d-%H%M')
     id = entry['id'][0,10]
     path = File.join(MD_PATH, "#{d}-#{id}.md")
     return path if File.exist?(path)
