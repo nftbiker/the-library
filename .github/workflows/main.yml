@@ -17,25 +17,31 @@ jobs:
         run: |
           ruby ./warpcast.rb
 
-      - name: Commit and Push Changes if any
+      - name: Check for changes
+        id: check_changes
         run: |
-          git add -A
-          if git diff --exit-code; then
-            git config --global user.name "GitHub Bot"
-            git config --global user.email "actions@github.com"
-
-            timestamp=$(date +'%Y%m%d%H%M%S')
-            branch_name="update-file-$timestamp"
-
-            git checkout -b "$branch_name"
-            git commit -m "Update archive"
-            git push origin "$branch_name"
-
-            git checkout main
-            git merge --no-ff "$branch_name"
-            git push origin main
-
-            # delete the temporary branch
-            git branch -d "$branch_name"
-            git push origin --delete "$branch_name"
+          if [[ -n $(git diff --porcelain) ]]; then
+              echo "changes=true" >> "$GITHUB_OUTPUT";
           fi
+
+      - name: Commit and Push Changes if any
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          git config --global user.name "GitHub Bot"
+          git config --global user.email "actions@github.com"
+
+          timestamp=$(date +'%Y%m%d%H%M%S')
+          branch_name="update-file-$timestamp"
+
+          git checkout -b "$branch_name"
+          git add -A
+          git commit -m "Update archive"
+          git push origin "$branch_name"
+
+          git checkout main
+          git merge --no-ff "$branch_name"
+          git push origin main
+
+          # delete the temporary branch
+          git branch -d "$branch_name"
+          git push origin --delete "$branch_name"
