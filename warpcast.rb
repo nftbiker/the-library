@@ -29,9 +29,8 @@ class Warpcast
 
   def call(options = {})
     upto = (options[:days] || 2).days.ago.beginning_of_day.to_i
-    puts "Process casts older from #{options[:from] ? Time.at(options[:from]).to_s : 'now'}"
+    puts "Process casts older from #{options[:from] ? Time.at(options[:from]/1000).to_s : 'now'}"
     list = retrieve(options[:from])
-    puts "#{options} - #{list.size}"
     list.each do |item|
       next if item['pinned']
       cast = item['cast']
@@ -125,3 +124,5 @@ class Warpcast
     (data["result"]||{})["items"]|| []
   end
 end
+
+Warpcast.new.call
