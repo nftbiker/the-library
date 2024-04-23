@@ -30,5 +30,7 @@ permalink: /:slug.html
 # theme: no-style-please
 theme: minima
 
+exclude: ["warpcast.rb", "README.md", ".gitignore", "_json"]
+
 plugins:
   - jekyll-feed
