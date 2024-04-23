@@ -34,18 +34,17 @@ class Warpcast
       next if item['pinned']
       cast = item['cast']
 
-      # is it a recast?
-      recasts = (cast['embeds'] || {})['casts'] || []
-      unless recasts.blank?
-        other = recasts.detect {|e| !e['embeds']['images'].blank?}
-        cast = other if other
+      images = get_images_from(cast)
+      if images.blank?
+        # is it a recast?
+        recasts = (cast['embeds'] || {})['casts'] || []
+        unless recasts.blank?
+          other = recasts.detect {|e| !e['embeds']['images'].blank?}
+          cast = other if other
+        end
+        images = get_images_from(cast)
       end
-
       # no image, no love
-      images = ((cast['embeds'] || {})['images'] || []).collect { |e|
-        next if e['type'] != 'image'
-        (e['media'] || {})['staticRaster'] || e['url'] || e['sourceUrl']
-      }.compact
       next if images.blank?
 
       # what we memoize
@@ -86,6 +85,13 @@ class Warpcast
 
   private
 
+  def get_images_from(cast)
+    ((cast['embeds'] || {})['images'] || []).collect { |e|
+      next if e['type'] != 'image'
+      (e['media'] || {})['staticRaster'] || e['url'] || e['sourceUrl']
+    }.compact
+  end
+
   def save_json(entry)
     path = File.join(JSON_PATH, "#{entry['id']}.json")
     return path if File.exist?(path)
@@ -94,7 +100,7 @@ class Warpcast
   end
 
   def save_markdown(entry)
-    d = Time.at(entry['timestamp'].to_i/1000).strftime('%Y-%m-%d-%H%M')
+    d = Time.at(entry['timestamp'].to_i/1000).getutc.strftime('%Y-%m-%d-%H%M')
     id = entry['id'][0,10]
     path = File.join(MD_PATH, "#{d}-#{id}.md")
     return path if File.exist?(path)
