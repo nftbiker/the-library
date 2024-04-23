@@ -19,6 +19,7 @@ jobs:
 
       - name: Commit and Push Changes if any
         run: |
+          git add -A
           if ! git diff --exit-code; then
             git config --global user.name "GitHub Bot"
             git config --global user.email "actions@github.com"
@@ -27,7 +28,6 @@ jobs:
             branch_name="update-file-$timestamp"
 
             git checkout -b "$branch_name"
-            git add -A
             git commit -m "Update archive"
             git push origin "$branch_name"
 
