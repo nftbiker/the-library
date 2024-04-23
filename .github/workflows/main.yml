@@ -20,7 +20,7 @@ jobs:
       - name: Check for changes
         id: check_changes
         run: |
-          if [[ -n $(git diff --porcelain) ]]; then
+          if [[ -n $(git status --porcelain) ]]; then
               echo "changes=true" >> "$GITHUB_OUTPUT";
           fi
 
