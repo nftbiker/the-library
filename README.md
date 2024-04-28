@@ -1,5 +1,12 @@
+# About
+
 A ruby script to download all entries from "The Library" channel and keep a copy in json and markdown format.
 The script is automatically run through a github actions to update the repository with new posts, twice a day.
+
+# Preview
+
+An HTML site built with the data generated from this script is visible at:
+https://artlibrary.netlify.app/
 
 # How to run
 
