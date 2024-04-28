@@ -78,7 +78,7 @@ class Warpcast
     Dir.glob("#{JSON_PATH}/*.json").each do |f|
       puts f
       res = JSON.parse(File.read(f))
-      save_markdown(res)
+      save_markdown(res, true)
     end
     true
   end
@@ -99,12 +99,14 @@ class Warpcast
     path
   end
 
-  def save_markdown(entry)
+  def save_markdown(entry, force = false)
     d = Time.at(entry['timestamp'].to_i/1000).getutc.strftime('%Y-%m-%d-%H%M')
     id = entry['id'][0,10]
     path = File.join(MD_PATH, "#{d}-#{id}.md")
-    return path if File.exist?(path)
+    return path if !force && File.exist?(path)
     author = entry['author']
+    img = entry['images'][0]
+
     front = []
     front << "---"
     front << "author: #{author['displayname']}"
@@ -113,6 +115,7 @@ class Warpcast
     front << "fid: #{author['fid']}"
     front << "cast_id: #{entry['id']}"
     front << "cast: https://warpcast.com/#{author['username']}/#{id}"
+    front << "image: #{img}"
     front << "layout: post"
     front << "---"
     front << ""
