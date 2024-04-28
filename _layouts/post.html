@@ -1,0 +1,22 @@
+---
+layout: default
+archive: false
+post_class: post-template
+---
+
+<div class="entry-header">
+    <!-- Post Title -->
+    <!-- <h1 class="posttitle">{{ page.title }}</h1> -->
+    <!-- Author & Date  Box -->
+    {% if page.author %}
+    <div class="d-flex align-items-center mt-4">
+        <div>
+        By <a href="https://warpcast.com/{{page.username}}" target="_blank">{{ page.author }}</a> on
+        <a href="{{cast}}" target="_blank"><span class="post-date"><time class="post-date" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time></span></a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Content -->
+{% include article.html %}
