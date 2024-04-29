@@ -5,8 +5,8 @@ description: >-
   Backup of casts published by the community in "the-library" warpcast channel
 logo: "assets/library.png"
 # favicon: 'assets/images/logo.png'
-baseurl: ""
-url: ""
+baseurl: "/the-library"
+url: "http://nftbiker.github.io"
 # include: ["_pages"]
 permalink: /:slug.html
 
@@ -32,9 +32,8 @@ kramdown:
 feed:
   posts_limit: 25
 
-site:
-  github:
-    url: "http://nftbiker.github.io/the-library"
+github:
+  url: "http://nftbiker.github.io/the-library"
 
 # Lazy Images ("enabled" or "disabled")
 lazyimages: "enabled"
