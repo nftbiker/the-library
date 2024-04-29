@@ -6,8 +6,16 @@
     <span>&laquo; </span>
   {% endif %}
 
-  {% assign from = paginator.page | minus: 3 | at_least: 1 %}
-  {% assign to = from | plus: 3 | at_most: paginator.total_pages %}
+
+  {% assign from = paginator.page | minus: 2 | at_least: 1 %}
+  {% assign to = paginator.page | plus: 2 | at_most: paginator.total_pages %}
+
+  {% if from>1 %}
+    <a class="ml-1 mr-1" href="{{ site.baseurl | append: '/' | replace: '//', '/' }}">1</a>
+    {% if from>2 %}
+      <span>&bull;</span>
+    {% endif %}
+  {% endif %}
 
   {% for page in (from..to) %}
     {% if page == paginator.page %}
@@ -18,6 +26,14 @@
       <a class="ml-1 mr-1" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
     {% endif %}
   {% endfor %}
+
+  {% assign bullet = paginator.total_pages | minus: 1 %}
+  {% if to<paginator.total_pages %}
+    {% if to<bullet %}
+    <span>&bull;</span>
+    {% endif %}
+    <a class="ml-1 mr-1" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', paginator.total_pages }}">{{paginator.total_pages}}</a>
+  {% endif %}
 
   {% if paginator.next_page %}
     <a class="ml-1 mr-1" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}"> &raquo;</a>
