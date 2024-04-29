@@ -4,12 +4,12 @@ title: Home
 paginate: true
 ---
 
-<!-- Posts Index
-================================================== -->
+<div class="toppagination">
+  <span class="navigation" role="navigation"> {% include pagination.html %} </span>
+</div>
+
 <div class="blog-grid-container">{% for post in paginator.posts %} {% include postbox.html %} {% endfor %}</div>
 
-<!-- Pagination
-================================================== -->
 <div class="bottompagination">
   <span class="navigation" role="navigation"> {% include pagination.html %} </span>
 </div>
