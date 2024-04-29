@@ -8,7 +8,7 @@ logo: "assets/library.png"
 baseurl: "/the-library"
 url: "https://nftbiker.github.io"
 # include: ["_pages"]
-permalink: /:slug.html
+permalink: :slug.html
 
 # Plugins
 plugins:
@@ -41,7 +41,7 @@ authorbox: "enabled"
 collections:
   authors:
     output: true
-    permalink: user/:title
+    permalink: /user/:title
 
 defaults:
   - scope:

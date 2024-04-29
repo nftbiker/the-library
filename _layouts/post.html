@@ -14,7 +14,7 @@ post_class: post-template
         By
             {% assign author = site.authors | where: 'username', page.username | first %}
             {% if author %}
-                <a href="{{ author.url }}">{{ author.displayname }}</a>
+                <a href="{{ author.url | prepend: site.baseurl | prepend: site.url }}">{{ author.displayname }}</a>
             {% else %}
             KO
             <a href="https://warpcast.com/{{page.username}}" target="_blank">{{ page.author }}</a>
