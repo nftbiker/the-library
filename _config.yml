@@ -2,7 +2,7 @@
 name: "The Library Backup"
 title: "The Library Backup"
 description: >-
-  Backup of casts by the community in "the-library" warpcast channel
+  Backup of casts published by the community in "the-library" warpcast channel
 logo: "assets/library.png"
 # favicon: 'assets/images/logo.png'
 baseurl: ""
@@ -28,6 +28,13 @@ markdown: kramdown
 kramdown:
   syntax_highlighter_opts:
     disable: true
+
+feed:
+  posts_limit: 25
+
+site:
+  github:
+    url: "http://nftbiker.github.io/the-library"
 
 # Lazy Images ("enabled" or "disabled")
 lazyimages: "enabled"
