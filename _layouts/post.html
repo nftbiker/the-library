@@ -11,7 +11,15 @@ post_class: post-template
     {% if page.author %}
     <div class="d-flex align-items-center mt-4">
         <div>
-        By <a href="https://warpcast.com/{{page.username}}" target="_blank">{{ page.author }}</a> on
+        By
+            {% assign author = site.authors | where: 'username', page.username | first %}
+            {% if author %}
+                <a href="{{ author.url }}">{{ author.displayname }}</a>
+            {% else %}
+            KO
+            <a href="https://warpcast.com/{{page.username}}" target="_blank">{{ page.author }}</a>
+            {% endif %}
+     on
         <a href="{{page.cast}}" target="_blank"><span class="post-date"><time class="post-date" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time></span></a>
         </div>
     </div>

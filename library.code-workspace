@@ -6,7 +6,11 @@
   ],
   "settings": {
     "[jekyll]": {
-      "editor.quickSuggestions": true,
+      "editor.quickSuggestions": {
+        "comments": "on",
+        "strings": "on",
+        "other": "on"
+      },
       "editor.formatOnSave": true,
       "editor.wordWrap": "on",
       "editor.renderWhitespace": "all",

@@ -11,6 +11,7 @@ require 'json'
 
 JSON_PATH = "./_json"
 MD_PATH = "./_posts"
+AUTH_PATH = "./_authors"
 TIME_FMT = "%Y-%m-%dT%H:%M:%S%z"
 
 class Warpcast
@@ -24,6 +25,7 @@ class Warpcast
   def create_paths
     FileUtils.mkdir_p(JSON_PATH) unless File.exist?(JSON_PATH)
     FileUtils.mkdir_p(MD_PATH) unless File.exist?(MD_PATH)
+    FileUtils.mkdir_p(AUTH_PATH) unless File.exist?(AUTH_PATH)
   end
 
   def call(options = {})
@@ -80,10 +82,31 @@ class Warpcast
       res = JSON.parse(File.read(f))
       save_markdown(res, true)
     end
-    true
+    store_authors
   end
 
   private
+
+  def store_authors
+    list = {}
+    Dir.glob("#{JSON_PATH}/*.json").each do |f|
+      res = JSON.parse(File.read(f))
+      author = res["author"]
+      list[author['username']] = author
+    end
+    list.values.each do |author|
+      path = File.join(AUTH_PATH, "#{author['username']}.md")
+      File.open(path, "wb") do |f|
+        f.write("---\n")
+        f.write("username: #{author['username']}\n")
+        f.write("displayname: #{author['displayname']}\n")
+        f.write("fid: #{author['fid']}\n")
+        f.write("profile: https://warpcast.com/#{author['username']}\n")
+        f.write("---\n")
+      end
+    end
+    true
+  end
 
   def get_images_from(cast)
     ((cast['embeds'] || {})['images'] || []).collect { |e|

@@ -35,6 +35,27 @@ lazyimages: "enabled"
 # Post Author Box ("enabled" or "disabled")
 authorbox: "enabled"
 
+collections:
+  authors:
+    output: true
+    permalink: user/:title
+
+defaults:
+  - scope:
+      path: ""
+      type: "authors"
+    values:
+      layout: "author"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
 # Sass
 sass:
   sass_dir: _sass
