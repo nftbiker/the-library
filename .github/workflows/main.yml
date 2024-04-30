@@ -47,4 +47,4 @@ jobs:
           git push origin --delete "$branch_name"
   build-pages:
     needs: update-restricted
-    uses: ./.github/workflows/jekyll.yml
+    uses: nftbiker/the-library/.github/workflows/jekyll.yml@main
