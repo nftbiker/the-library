@@ -4,7 +4,7 @@ layout: default
 
 <div class="author-box">
   {% if page.avatar %}
-  <img class="author-avatar" src="{{ page.avatar | replace: 'jpg' : 'jpeg' }}" alt="{{ page.display_name }}" referrerpolicy="no-referrer" />
+  <img class="author-avatar" src="{{ page.avatar | replace: 'jpg', 'jpeg' }}" alt="{{ page.display_name }}" referrerpolicy="no-referrer" />
   {% endif %}
 
   <h1>{{ page.displayname }}</h1>
