@@ -4,7 +4,9 @@
   "author": {
     "username": "patricktresset",
     "displayname": "Patrick Tresset",
-    "fid": 262671
+    "fid": 262671,
+    "avatar": "https://i.imgur.com/y4pKhFC.gif",
+    "description": "Art, performances, installations, etc."
   },
   "text": "The structures of chance: Probabilities and their uses\nJean Louis Boursin, 1986\n\nThis is a very small book (190p) but excellent for understanding probabilities (it is not intuitive). It can help with generative works and understanding some of the basis of machine learning/AI.",
   "images": [

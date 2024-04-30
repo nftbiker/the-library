@@ -4,7 +4,9 @@
   "author": {
     "username": "markwebster",
     "displayname": "Mark Webster",
-    "fid": 317009
+    "fid": 317009,
+    "avatar": "https://verse-mainnet.s3.amazonaws.com/0.png",
+    "description": "Artist\nmwebster.online"
   },
   "text": "For those interested in tiling and raster imaging techniques. Robert Bosch describes various systems in his book and through his art.",
   "images": [

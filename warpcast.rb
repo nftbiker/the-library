@@ -57,14 +57,16 @@ class Warpcast
           username: cast['author']['username'],
           displayname: cast['author']['displayName'],
           fid: cast['author']['fid'],
+          avatar: cast['author']['pfp']['url'],
+          description: cast['author']['profile']['bio']['text'],
         }.stringify_keys,
         text: cast['text'],
         images: images
       }
 
       res.stringify_keys!
-      save_json(res)
-      save_markdown(res)
+      save_json(res, options[:force])
+      save_markdown(res, options[:force])
       casts[res['id']] = res
     end
 
@@ -72,7 +74,7 @@ class Warpcast
       from = list.last['timestamp']
       return call(options.merge(from: from)) if from/1000>upto
     end
-    casts
+    store_authors
   end
 
   def reprocess
@@ -94,15 +96,22 @@ class Warpcast
       author = res["author"]
       list[author['username']] = author
     end
+
     list.values.each do |author|
       path = File.join(AUTH_PATH, "#{author['username']}.md")
+      front = []
+      front << "---"
+      front << "username: #{author['username']}"
+      front << "displayname: #{author['displayname']}"
+      front << "fid: #{author['fid']}"
+      front << "profile: https://warpcast.com/#{author['username']}"
+      front << "avatar: #{author['avatar']}" if author['avatar']
+      front << "---"
+      front << ""
+
       File.open(path, "wb") do |f|
-        f.write("---\n")
-        f.write("username: #{author['username']}\n")
-        f.write("displayname: #{author['displayname']}\n")
-        f.write("fid: #{author['fid']}\n")
-        f.write("profile: https://warpcast.com/#{author['username']}\n")
-        f.write("---\n")
+        f.write(front.join("\n"))
+        f.write("#{author['description'].to_s.strip.gsub("\n", "  \n")}  \n")
       end
     end
     true
@@ -115,9 +124,9 @@ class Warpcast
     }.compact
   end
 
-  def save_json(entry)
+  def save_json(entry, force = false)
     path = File.join(JSON_PATH, "#{entry['id']}.json")
-    return path if File.exist?(path)
+    return path if !force && File.exist?(path)
     File.open(path, "wb") {|f|f.write(JSON.pretty_generate(entry))}
     path
   end

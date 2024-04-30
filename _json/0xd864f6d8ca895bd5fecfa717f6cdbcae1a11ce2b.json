@@ -4,7 +4,9 @@
   "author": {
     "username": "ryanthompson",
     "displayname": "Ryan",
-    "fid": 340870
+    "fid": 340870,
+    "avatar": "https://i.imgur.com/Cv8B5uD.jpg",
+    "description": "Artist and Book Publisher\nwww.objkt.com/@ryanthompson\nwww.ryanthompson.name"
   },
   "text": "'Machines Upon Every Flower' is a book of machine-generated poetry and illustrations by Karmel Allison and Gregory Chatonsky. Allison's poems written with a neural net and Chatonsky's custom software which reads the poems, extracting the keywords then referencing a human annotated database to draw outlines of forms.",
   "images": [

@@ -7,8 +7,8 @@ logo: "assets/library.png"
 # favicon: 'assets/images/logo.png'
 baseurl: "/the-library"
 url: "https://nftbiker.github.io"
-# include: ["_pages"]
 permalink: :slug.html
+include: ["_pages"]
 
 # Plugins
 plugins:

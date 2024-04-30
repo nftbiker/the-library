@@ -4,7 +4,9 @@
   "author": {
     "username": "ryanthompson",
     "displayname": "Ryan",
-    "fid": 340870
+    "fid": 340870,
+    "avatar": "https://i.imgur.com/Cv8B5uD.jpg",
+    "description": "Artist and Book Publisher\nwww.objkt.com/@ryanthompson\nwww.ryanthompson.name"
   },
   "text": "'Deep Learning Describes Abstract Painting' by Emmanuel Marceau was one of the first projects I saw utilizing deep learning image recognition + captioning for something it wasn't built for. I believe this was 2017-18, in a new era where machine learning tools were becoming available for artists to make and break.",
   "images": [
