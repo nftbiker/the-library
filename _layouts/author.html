@@ -9,8 +9,8 @@ layout: default
 
   <h1>{{ page.displayname }}</h1>
   <a href="{{page.profile}}" target="_blank">{{page.username}}</a>
-  {{ content }}
   <br clear="all" />
+  {{ content }}
 </div>
 
 <div class="blog-grid-container">{% assign filtered_posts = site.posts | where: 'fid', page.fid %} {% for post in filtered_posts %} {% include postbox.html %} {% endfor %}</div>
