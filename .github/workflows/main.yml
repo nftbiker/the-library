@@ -45,3 +45,5 @@ jobs:
           # delete the temporary branch
           git branch -d "$branch_name"
           git push origin --delete "$branch_name"
+  build-pages:
+    uses: ./.github/workflows/jekyll.yml
