@@ -242,6 +242,29 @@ img:hover {
   }
 }
 
+.author-box {
+  display: block;
+  clear: both;
+  h1 {
+    float: left;
+  }
+  a {
+    float: left;
+    margin-top: 15px;
+    margin-left: 15px;
+  }
+  .author-avatar {
+    float: left;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 7px;
+  }
+  p {
+    display: block;
+    clear: both;
+  }
+}
+
 // blog grid
 .blog-grid-container {
   width: auto;
@@ -262,6 +285,9 @@ img:hover {
     width: 40px;
     border-radius: 50%;
     margin-right: 7px;
+  }
+  .maxthumb {
+    margin: 20px auto;
   }
   .card {
     margin: 0 auto;
@@ -296,7 +322,7 @@ img:hover {
   .card-footer {
     font-size: 14px;
     border-top: 0;
-    padding: 1rem 1.25rem;
+    padding: 0 0 1rem;
     a {
       color: inherit;
       font-weight: 700;
@@ -304,7 +330,6 @@ img:hover {
   }
   .post-date {
     float: right;
-    margin-top: 10px;
   }
   .img-thumb {
     object-fit: cover;

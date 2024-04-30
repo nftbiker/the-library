@@ -2,8 +2,15 @@
 layout: default
 ---
 
-<h1>{{ page.displayname }}</h1>
-Warpcast : <a href="{{page.profile}}" target="_blank">{{page.username}}</a>
-{{ content }}
+<div class="author-box">
+  {% if page.avatar %}
+  <img class="author-avatar" src="{{ page.avatar | replace: 'jpg' : 'jpeg' }}" alt="{{ page.display_name }}" referrerpolicy="no-referrer" />
+  {% endif %}
+
+  <h1>{{ page.displayname }}</h1>
+  <a href="{{page.profile}}" target="_blank">{{page.username}}</a>
+  {{ content }}
+  <br clear="all" />
+</div>
 
 <div class="blog-grid-container">{% assign filtered_posts = site.posts | where: 'fid', page.fid %} {% for post in filtered_posts %} {% include postbox.html %} {% endfor %}</div>
