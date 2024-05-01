@@ -696,7 +696,9 @@ img:hover {
   .site-content {
     padding-top: 0;
   }
-
+  .blog-grid-container {
+    grid-template-columns: 1fr;
+  }
   .wrap-search {
     right: 25px;
     display: flex;
