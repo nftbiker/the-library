@@ -84,7 +84,7 @@ class Warpcast
   def reprocess
     # reprocess all json entries to save new markdown version
     Dir.glob("#{JSON_PATH}/*.json").each do |f|
-      puts f
+      puts f.split("/").last.split(".").first
       res = JSON.parse(File.read(f))
       save_markdown(res, true)
     end
