@@ -67,7 +67,6 @@ class Warpcast
         text: cast["text"],
         images: images,
       }
-
       res.stringify_keys!
       save_json(res, options[:force])
       save_markdown(res, options[:force])
@@ -188,7 +187,9 @@ class Warpcast
     Dir.glob("#{JSON_PATH}/*.json").each do |f|
       res = JSON.parse(File.read(f))
       author = res["author"]
-      list[author["fid"].to_i] = author
+      author.delete_if { |k, v| v.blank? }
+      list[author["fid"].to_i] ||= {}
+      list[author["fid"].to_i].merge!(author)
     end
     list
   end
