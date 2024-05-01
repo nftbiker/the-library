@@ -1,6 +1,6 @@
 ---
 username: hilbertspace
-displayname: hilbert space 
+displayname: hilbert space
 fid: 291237
 profile: https://warpcast.com/hilbertspace
 avatar: https://i.imgur.com/yuOB013.jpg

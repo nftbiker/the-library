@@ -1,6 +1,6 @@
 ---
 username: isolationist
-displayname: Isolationist 
+displayname: Isolationist
 fid: 416898
 profile: https://warpcast.com/isolationist
 avatar: https://i.imgur.com/hYMPEma.jpg

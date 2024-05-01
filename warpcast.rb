@@ -51,6 +51,7 @@ class Warpcast
           other = recasts.detect { |e| !e["embeds"]["images"].blank? }
           if other
             other["recast_by"] = get_profile_from(cast["author"])
+            other["recast_hash"] = cast["hash"]
             cast = other
           end
         end
@@ -67,6 +68,10 @@ class Warpcast
         text: cast["text"],
         images: images,
       }
+      if cast["recast_by"]
+        res[:recast_by] = cast["recast_by"]
+        res[:recast_hash] = cast["recast_hash"]
+      end
       res.stringify_keys!
       save_json(res, options[:force])
       save_markdown(res, options[:force])
@@ -281,6 +286,12 @@ class Warpcast
     front << "cast_id: #{entry["id"]}"
     front << "cast: https://warpcast.com/#{author["username"]}/#{id}"
     front << "image: #{img}"
+    unless entry["recast_hash"].blank?
+      author = entry["recast_by"]
+      front << "recast_author: #{author["displayname"]}"
+      front << "recast_username: #{author["username"]}"
+      front << "recast_hash: #{entry["recast_hash"]}"
+    end
     front << "layout: post"
     front << "---"
     front << ""

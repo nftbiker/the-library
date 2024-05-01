@@ -1,6 +1,6 @@
 ---
 username: pixelsymphony
-displayname: Pixel Symphony 
+displayname: Pixel Symphony
 fid: 232704
 profile: https://warpcast.com/pixelsymphony
 avatar: https://i.imgur.com/9rfO3oM.jpg

@@ -1,6 +1,6 @@
 ---
 username: raquelgaudard
-displayname: Raquel Gaudard 
+displayname: Raquel Gaudard
 fid: 329826
 profile: https://warpcast.com/raquelgaudard
 avatar: https://i.imgur.com/SAqKNEl.jpg

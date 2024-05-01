@@ -1,6 +1,6 @@
 ---
 username: miaforrest
-displayname: Mia 🎩 
+displayname: Mia 🎩
 fid: 261238
 profile: https://warpcast.com/miaforrest
 avatar: https://i.imgur.com/Mh3Vjc6.jpg

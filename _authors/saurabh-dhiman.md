@@ -1,6 +1,6 @@
 ---
 username: saurabh-dhiman
-displayname: Saurabh 
+displayname: Saurabh
 fid: 264270
 profile: https://warpcast.com/saurabh-dhiman
 avatar: https://i.imgur.com/SYWgVS7.jpg
