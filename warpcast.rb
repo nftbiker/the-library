@@ -9,12 +9,15 @@ end
 require "active_support/all"
 require "json"
 
+# change this to backup another channel
+CHANNEL_ID = "the-library"
+
+# no need to change anything below
 JSON_PATH = "./_json"
 MD_PATH = "./_posts"
 AUTH_PATH = "./_authors"
 TIME_FMT = "%Y-%m-%dT%H:%M:%S%z"
-CHANNEL_URL = "https://warpcast.com/~/channel/the-library"
-
+CHANNEL_URL = "https://warpcast.com/~/channel/#{CHANNEL_ID}"
 PINATA_URL = "https://hub.pinata.cloud/v1"
 PINATA_ORIGIN_TS = 1609455600 # 2021-01-01 00:00:00 +0100
 
@@ -293,7 +296,7 @@ class Warpcast
   def retrieve(from = nil)
     from ||= Time.now.to_i * 1000
     api = RestClient.post("https://client.warpcast.com/v2/feed-items", {
-      feedKey: "the-library",
+      feedKey: CHANNEL_ID,
       feedType: "default",
       viewedCastHashes: "",
       updateState: true,
