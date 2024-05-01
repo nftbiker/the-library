@@ -147,6 +147,7 @@ class Warpcast
         save_markdown(item)
       end
     end
+    store_authors
     true
   end
 
