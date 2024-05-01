@@ -262,7 +262,7 @@ class Warpcast
       f.write(front.join("\n"))
       f.write("#{entry["text"].gsub("\n", "  \n")}  \n")
       entry["images"].each do |i|
-        f.write("\n![](#{proper_image(i)})")
+        f.write("\n<img src='#{proper_image(i)}' alt='' referrerpolicy='no-referrer'/>")
       end
     }
     path
