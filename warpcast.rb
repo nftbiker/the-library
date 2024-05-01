@@ -183,10 +183,6 @@ class Warpcast
     }.stringify_keys
   end
 
-  def get_author_key(author, key, type)
-    val = author.detect { |e| e[] }
-  end
-
   def get_authors
     list = {}
     Dir.glob("#{JSON_PATH}/*.json").each do |f|
