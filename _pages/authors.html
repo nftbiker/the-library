@@ -5,14 +5,14 @@ permalink: /casters
 ---
 
 <div class="list-authors mt-5">
-  {% for author in site.authors %}
+  <div class="entry-header">List all people that casted at least 2 books (with images) in the channel.</div>
+  {% assign sorted = site.authors | where_exp:"user", "user.posts_count > 1" | sort: 'posts_count' | reverse %} {% for author in sorted %}
   <div id="{{ author.username }}" class="authorbox position-relative pb-2 pt-2 border">
     <div class="row">
       <div class="wrapavname col-md-3 text-center">
         {% if author.avatar %}
         <img class="author-thumb" src="{{author.avatar}}" alt="{{ author.displayname }}" referrerpolicy="no-referrer" />
         {% endif %}
-
         <p class="mt-4 mb-0 small text-center">
           {% if author.web %}
           <a target="_blank" class="d-inline-block mx-1 text-dark" href="{{ author.web }}"><i class="fa fa-link"></i></a>
@@ -23,6 +23,7 @@ permalink: /casters
       <div class="col-md-9">
         <h3><a class="d-inline-block mx-1 text-dark" href="{{ author.url | prepend: site.baseurl | prepend: site.url }}">{{ author.displayname }}</a></h3>
         <p class="mt-3 mb-0">{{ author.description }}</p>
+        {{ author.posts_count }} casts
       </div>
     </div>
   </div>

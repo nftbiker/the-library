@@ -447,6 +447,8 @@ img:hover {
   }
   .author-thumb {
     width: 70px;
+    height: 70px;
+    object-fit: contain;
     border-radius: 50%;
     border: 2px solid darken($primary, 20%);
     padding: 2px;
