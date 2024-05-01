@@ -105,10 +105,11 @@ class Warpcast
     results = []
 
     body["messages"].each do |data|
-      next if json_exist?(data["hash"])
-
       cast = data["data"]
+      authors[cast["fid"]] = true
+
       next if cast["type"] != "MESSAGE_TYPE_CAST_ADD"
+      next if json_exist?(data["hash"])
 
       msg = cast["castAddBody"]
       embeds = msg["embeds"].map { |e| e["url"] }.compact
@@ -119,7 +120,6 @@ class Warpcast
       end
       next if images.blank?
 
-      authors[cast["fid"]] = true
       # what we memoize
       res = {
         id: data["hash"],
@@ -134,7 +134,22 @@ class Warpcast
       results.push(res)
     end
 
-    authors = authors_infos(authors.keys)
+    fix_authors(authors.keys, results)
+  end
+
+  def fix_authors(missing_ids = [], results = [])
+    if missing_ids.blank? || results.blank?
+      Dir.glob("#{JSON_PATH}/*.json").each do |f|
+        res = JSON.parse(File.read(f))
+        if res["author"] && res["author"]["avatar"].blank?
+          results << res
+          missing_ids << res["author"]["fid"]
+        end
+      end
+    end
+    return if missing_ids.blank?
+
+    authors = authors_infos(missing_ids)
     results.each do |item|
       a = authors[item["author"]["fid"]]
       if a.blank?
@@ -155,8 +170,9 @@ class Warpcast
     list = get_authors
     author_ids.each do |fid|
       fid = fid.to_i
-      next if list[fid]
-      list[fid] = get_author(fid)
+      next if list[fid] && !list[fid]["avatar"].blank?
+      list[fid] ||= {}
+      list[fid].merge!(get_author(fid))
     end
     list
   end
@@ -173,13 +189,16 @@ class Warpcast
       hsh[k] = e["value"] unless k.blank?
       hsh
     end
-    {
+
+    res = {
       username: data["username"].to_s.strip,
       displayname: data["display"].to_s.strip,
       fid: fid.to_i,
       avatar: data["pfp"],
       description: data["bio"],
     }.stringify_keys
+    res.delete_if { |k, v| v.blank? }
+    res
   end
 
   def get_authors
