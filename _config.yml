@@ -42,6 +42,7 @@ collections:
   authors:
     output: true
     permalink: /user/:title
+    sort_by: displayname
 
 defaults:
   - scope:

@@ -37,25 +37,23 @@
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
     </noscript>
 
-
     <div class="site-content {% if page.url == '/' %} firstpage {% endif %}">
       <div class="container">
-        <!-- Site Logo/Name
-    ================================================== -->
-
         <a class="navbar-brand" href="{{ site.baseurl }}/">
           <img src="{{ site.baseurl }}/{{ site.logo }}" alt="{{ site.name }}" />
           {{site.name}}
         </a>
 
-        <!-- Content
-    ================================================== -->
-        <div class="main-content">
-          {% include search-lunr.html %}
+        <div class="main-content">{% include search-lunr.html %} {{ content }}</div>
+      </div>
 
-          {{ content }}
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 text-center text-lg-left">{{ site.time | date: "%Y" }} {{ site.name }} - <a href="{{ site.baseurl }}/casters">Casters</a></div>
+          </div>
         </div>
-
+      </footer>
     </div>
     <!-- /.site-content -->
 

@@ -407,10 +407,8 @@ img:hover {
 .rating,
 .authorbox {
   max-width: 740px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 20px 0px 0px !important;
+  margin: 20px auto;
 }
 .posttitle {
   font-size: 50px;
@@ -441,8 +439,6 @@ img:hover {
   }
 }
 .authorbox {
-  margin-top: 50px;
-  margin-bottom: 50px;
   .author-description {
     font-size: 16px;
   }

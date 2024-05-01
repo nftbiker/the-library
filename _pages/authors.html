@@ -1,12 +1,12 @@
 ---
 layout: page
-title: Authors
-permalink: /authors
+title: Casters
+permalink: /casters
 ---
 
 <div class="list-authors mt-5">
   {% for author in site.authors %}
-  <div id="{{ author.username }}" class="authorbox position-relative pb-5 pt-5 mb-4 mt-4 border">
+  <div id="{{ author.username }}" class="authorbox position-relative pb-2 pt-2 border">
     <div class="row">
       <div class="wrapavname col-md-3 text-center">
         {% if author.avatar %}
@@ -21,7 +21,7 @@ permalink: /authors
       </div>
 
       <div class="col-md-9">
-        <h3><a target="_blank" class="d-inline-block mx-1 text-dark" href="{{ author.url | prepend: site.baseurl | prepend: site.url }}">{{ author.displayname }}</a></h3>
+        <h3><a class="d-inline-block mx-1 text-dark" href="{{ author.url | prepend: site.baseurl | prepend: site.url }}">{{ author.displayname }}</a></h3>
         <p class="mt-3 mb-0">{{ author.description }}</p>
       </div>
     </div>
