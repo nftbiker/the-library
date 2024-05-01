@@ -49,7 +49,10 @@ class Warpcast
         recasts = (cast["embeds"] || {})["casts"] || []
         unless recasts.blank?
           other = recasts.detect { |e| !e["embeds"]["images"].blank? }
-          cast = other if other
+          if other
+            other["recast_by"] = get_profile_from(cast["author"])
+            cast = other
+          end
         end
         images = get_images_from(cast)
       end
@@ -60,13 +63,7 @@ class Warpcast
       res = {
         id: cast["hash"],
         timestamp: cast["timestamp"],
-        author: {
-          username: cast["author"]["username"].to_s.strip,
-          displayname: cast["author"]["displayName"].to_s.strip,
-          fid: cast["author"]["fid"],
-          avatar: cast["author"]["pfp"]["url"],
-          description: cast["author"]["profile"]["bio"]["text"],
-        }.stringify_keys,
+        author: get_profile_from(cast["author"]),
         text: cast["text"],
         images: images,
       }
@@ -168,6 +165,16 @@ class Warpcast
   end
 
   private
+
+  def get_profile_from(author)
+    {
+      username: author["username"].to_s.strip,
+      displayname: author["displayName"].to_s.strip,
+      fid: author["fid"],
+      avatar: author["pfp"]["url"],
+      description: author["profile"]["bio"]["text"],
+    }.stringify_keys
+  end
 
   def authors_infos(author_ids)
     list = get_authors
