@@ -19,7 +19,7 @@ plugins:
 
 # Pagination
 
-paginate: 20
+paginate: 12
 paginate_path: /page:num/
 
 # Other
