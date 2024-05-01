@@ -290,7 +290,7 @@ class Warpcast
       author = entry["recast_by"]
       front << "recast_author: #{author["displayname"]}"
       front << "recast_username: #{author["username"]}"
-      front << "recast_hash: #{entry["recast_hash"]}"
+      front << "recast_hash: https://warpcast.com/#{author["username"]}/#{entry["recast_hash"].to_s[0, 10]}"
     end
     front << "layout: post"
     front << "---"

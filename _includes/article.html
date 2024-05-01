@@ -1,3 +1,6 @@
 <!-- Post, Page Content
 ================================================== -->
-<div class="article-post">{{content}}</div>
+<div class="article-post">
+  {{content}} {% if page.recast_hash %}
+  <p>This cast was republished in the channel by <a href="{{page.recast_hash}}" target="_blank">{{page.recast_author}}</a>. {% endif %}</p>
+</div>
