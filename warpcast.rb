@@ -148,7 +148,6 @@ class Warpcast
       end
     end
     store_authors
-    true
   end
 
   private
