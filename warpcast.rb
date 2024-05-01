@@ -157,8 +157,8 @@ class Warpcast
       else
         item["author"] = a
         puts "Save cast #{item["id"]}"
-        save_json(item)
-        save_markdown(item)
+        save_json(item, true)
+        save_markdown(item, true)
       end
     end
     store_authors
@@ -196,7 +196,8 @@ class Warpcast
       fid: fid.to_i,
       avatar: data["pfp"],
       description: data["bio"],
-    }.stringify_keys
+    }
+    res.stringify_keys!
     res.delete_if { |k, v| v.blank? }
     res
   end

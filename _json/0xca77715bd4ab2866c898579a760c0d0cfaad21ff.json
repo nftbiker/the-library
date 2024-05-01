@@ -4,7 +4,9 @@
   "author": {
     "username": "markwebster",
     "displayname": "Mark Webster",
-    "fid": 317009
+    "fid": 317009,
+    "avatar": "https://verse-mainnet.s3.amazonaws.com/0.png",
+    "description": "Artist\nmwebster.online"
   },
   "text": "Another essential for the coders amongst us is \n10 PRINT CHR$(205.5+RND(1)); : GOTO 10\nAlso available online but I'd recommend the book that is beautifully designed. \nhttps://10print.org/",
   "images": [

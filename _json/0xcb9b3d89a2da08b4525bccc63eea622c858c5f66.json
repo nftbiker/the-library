@@ -4,7 +4,9 @@
   "author": {
     "username": "p1x3lboy",
     "displayname": "P1x3lboy",
-    "fid": 326732
+    "fid": 326732,
+    "avatar": "https://i.imgur.com/liMJIHv.gif",
+    "description": "Generative artist. Mostly using p5.js."
   },
   "text": "I often refer back to this book for inspiration after hearing Cacheflowe refer to it on a stream about shaders a while back.",
   "images": [
