@@ -5,8 +5,8 @@ description: >-
   Backup of casts published by the community in "the-library" warpcast channel
 logo: "assets/library.png"
 # favicon: 'assets/images/logo.png'
-baseurl: "/the-library"
-url: "https://nftbiker.github.io"
+baseurl: ""
+url: ""
 permalink: :slug.html
 include: ["_pages"]
 
