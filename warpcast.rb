@@ -4,13 +4,14 @@ gemfile do
   gem "activesupport"
   gem "rest-client"
   gem "pp"
+  gem "dotenv"
 end
 
 require "active_support/all"
 require "json"
 
 # change this to backup another channel
-CHANNEL_ID = "the-library"
+CHANNEL_ID = ENV["CHANNEL_ID"] || "the-library"
 
 # no need to change anything below
 JSON_PATH = "./_json"
