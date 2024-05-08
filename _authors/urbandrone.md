@@ -5,6 +5,6 @@ fid: 390761
 profile: https://warpcast.com/urbandrone
 avatar: https://i.imgur.com/byRwdZe.png
 ---
-Digital Architect since 2006 []  
+Digital Architect  []  
 /av-lab  []  
 alterhen.art/artist/zaki-jawhari  
