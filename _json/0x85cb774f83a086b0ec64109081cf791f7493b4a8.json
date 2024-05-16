@@ -1,0 +1,15 @@
+{
+  "id": "0x85cb774f83a086b0ec64109081cf791f7493b4a8",
+  "timestamp": 1715856358000,
+  "author": {
+    "username": "fridgebuzz",
+    "displayname": "Vanessa Williams",
+    "fid": 245237,
+    "avatar": "https://i.imgur.com/6pgIE9y.jpg",
+    "description": "Software engineer, creative coder, aspiring generative artist, fridgebuzz.tez/.eth"
+  },
+  "text": "I seem to have thrown out my first edition (more books than space), but this was my first introduction to generative art. All examples are in the Renderman shading language. Sadly, at that time Renderman was no longer available to the public. (Pixar had taken it in-house.)",
+  "images": [
+    "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/1fa7b9c7-0d99-4f3e-5af0-53cd17e06c00/original"
+  ]
+}
