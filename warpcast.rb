@@ -1,3 +1,6 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
 require "bundler/inline"
 gemfile do
   source "https://rubygems.org"
@@ -81,7 +84,9 @@ class Warpcast
 
     if list.size >= 15
       from = list.last["timestamp"]
-      return call(options.merge(from: from)) if from / 1000 > upto
+      if from != options[:from] && from / 1000 > upto
+        return call(options.merge(from: from))
+      end
     end
     store_authors
   end
@@ -214,7 +219,7 @@ class Warpcast
       description: data["bio"],
     }
     res.stringify_keys!
-    res.delete_if { |k, v| v.blank? }
+    res.delete_if { |_, v| v.blank? }
     res
   end
 
@@ -223,7 +228,7 @@ class Warpcast
     Dir.glob("#{JSON_PATH}/*.json").each do |f|
       res = JSON.parse(File.read(f))
       author = res["author"]
-      author.delete_if { |k, v| v.blank? }
+      author.delete_if { |_, v| v.blank? }
       list[author["fid"].to_i] ||= {}
       list[author["fid"].to_i].merge!(author)
     end
