@@ -1,6 +1,6 @@
 ---
 username: andreasbirath
-displayname: Andreas Birath
+displayname: Andreas Birath 🫂
 fid: 330839
 profile: https://warpcast.com/andreasbirath
 avatar: https://i.imgur.com/zobLaT1.jpg
