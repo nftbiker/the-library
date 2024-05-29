@@ -1,0 +1,23 @@
+{
+  "id": "0x9d3b23ec1aa55b83d2ba49bcaf68145c8c044a5b",
+  "timestamp": 1716989363000,
+  "author": {
+    "username": "phil",
+    "displayname": "phil",
+    "fid": 129,
+    "avatar": "https://i.imgur.com/Q2rFwvL.gif",
+    "description": "Building /bright-moments - minting onchain art IRL | /purple #15 | FID 129 #magikarp"
+  },
+  "text": "The hardcover version of our VENICE TO VENICE book is now available with one-day shipping on Amazon.\n\nGreat coffee table accessory that includes high-resolution images of every Bright Moments project from the past three years. \n\nAvailable while supplies last: https://a.co/d/edaEWDI",
+  "images": [
+    "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/d6ba28ec-4f2c-4b8e-9d7e-0ba1d0ded900/original"
+  ],
+  "recast_by": {
+    "username": "vortac",
+    "displayname": "tim/vortac",
+    "fid": 209586,
+    "avatar": "https://i.imgur.com/TKcfxSt.png",
+    "description": "Hosting /the-library /deca /newmasters\n— Graphic designer / Creative technologist / solving problems with design and code / Generative Art and Design / Web3"
+  },
+  "recast_hash": "0xac1ede609966a29642314974bacf163cbb5d1799"
+}
