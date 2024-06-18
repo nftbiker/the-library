@@ -52,7 +52,7 @@ class Warpcast
         # is it a recast?
         recasts = (cast["embeds"] || {})["casts"] || []
         unless recasts.blank?
-          other = recasts.detect { |e| !e["embeds"]["images"].blank? }
+          other = recasts.detect { |e| !e["embeds"].blank? && !e["embeds"]["images"].blank? }
           if other
             other["recast_by"] = get_profile_from(cast["author"])
             other["recast_hash"] = cast["hash"]
