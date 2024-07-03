@@ -1,0 +1,15 @@
+{
+  "id": "0xb107f4941db099e22ba8d6ee1a6d966d901c0a98",
+  "timestamp": 1720032202000,
+  "author": {
+    "username": "nbswwit",
+    "displayname": "nbswwit",
+    "fid": 308445,
+    "avatar": "https://i.imgur.com/EbzQUCS.jpg",
+    "description": "Artist\n\nhttps://linktr.ee/nbswwit"
+  },
+  "text": "10 PRINT CHR$(205.5+RND(1)); : GOTO 10\n\n\"This book takes a single line of code—the extremely concise BASIC program for the Commodore 64 inscribed in the title—and uses it as a lens through which to consider the phenomenon of creative computing and the way computer programs exist in culture.\"\n\nhttps://10print.org/",
+  "images": [
+    "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/228150b6-8be8-441b-05ce-d54971a2d200/original"
+  ]
+}
