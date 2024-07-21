@@ -3,6 +3,6 @@ username: psr
 displayname: PixelSushiRobot 💫
 fid: 205525
 profile: https://warpcast.com/psr
-avatar: https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/0c25874f-7055-4bb7-bba2-0507c429cf00/original
+avatar: https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/28b6137b-1a7c-4704-32e8-0b851c91df00/original
 ---
 I am Jeffrey ✶ Co-Host of /newmasters ✶ Co-Curator of /cryptoart ✶ 👾 Designer ✶ 🍣 Foodie ✶ 🤖 Technophile ✶ 🖼️ Artist—Collector ✶ 🔗 links.psr.fyi  
