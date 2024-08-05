@@ -9,3 +9,4 @@ avatar: https://i.imgur.com/n5BLfWV.gif
 ɴᴏᴡ ᴘʟᴀʏɪɴɢ ──────⚪──  
  ⇄   ◃◃   ⅠⅠ   ▹▹   ↻  
 duaneking.twitter  
+moonshot.ooo  
