@@ -1,0 +1,16 @@
+{
+  "id": "0xf275d98277e8a56998a1a8cea351b941df53a141",
+  "timestamp": 1729255505000,
+  "author": {
+    "username": "luka",
+    "displayname": "Luka →{protocell:labs}← 🎩",
+    "fid": 217834,
+    "avatar": "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/17836d13-5a16-4e94-b8e7-8ca18a540a00/rectcrop3",
+    "description": "Computational architect. Some structure, mostly chaos. Co-founder {protocell:labs}\n\nhttps://protocell.xyz/"
+  },
+  "text": "Digital Fundamentals, by Thomas L. Floyd\n\nAn excellent textbook on fundamentals of digital systems, it takes you step-by-step in building up knowledge in the domain.\n\nFavorite chapter: The universal property of NAND and NOR gates (I know @mikegee will appreciate this one)",
+  "images": [
+    "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/3c446bc2-1d5e-47e3-568d-c26953bdcc00/original",
+    "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/7277f1de-f5e5-40b1-d43b-859977e6fc00/original"
+  ]
+}
