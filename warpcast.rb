@@ -8,6 +8,7 @@ gemfile do
   gem "rest-client"
   gem "pp"
   gem "dotenv"
+  gem "securerandom", "~> 0.1.0"
 end
 
 require "active_support/all"
