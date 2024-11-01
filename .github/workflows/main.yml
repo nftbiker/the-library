@@ -12,6 +12,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+      - name: Setup ruby version
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+      - name: update gems
+        run: |
+          gem install securerandom
 
       - name: Run script
         run: |
