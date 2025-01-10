@@ -17,7 +17,7 @@ jobs:
         # change this to (see https://github.com/ruby/setup-ruby#versioning):
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.3"
+          ruby-version: "3.1"
       - name: update gems
         run: |
           gem install securerandom
