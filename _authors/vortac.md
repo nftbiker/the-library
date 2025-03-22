@@ -5,5 +5,5 @@ fid: 209586
 profile: https://warpcast.com/vortac
 avatar: https://i.imgur.com/TKcfxSt.png
 ---
-Hosting /the-library /deca /newmasters  
-— Graphic designer / Creative technologist / solving problems with design and code / Generative Art and Design / Web3  
+Hosts /the-library — Moderates /gen-art /deca /newmasters  
+— Designs graphics + UI / Crafts code + technology / Collects art / Loves books / Builds community  
