@@ -1,0 +1,24 @@
+{
+  "id": "0xd92a2813ef56b7c957bb585d5581ffc3c64b9d12",
+  "timestamp": 1746300623000,
+  "author": {
+    "username": "labadie.eth",
+    "displayname": "zack",
+    "fid": 7325,
+    "avatar": "https://i.imgur.com/JKlua1Z.jpg",
+    "description": "design @uniswap • zack.design"
+  },
+  "text": "Ruby Justice Thélot, A Few Essays on Taste",
+  "images": [
+    "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/ddffa50a-017e-47f3-e895-df4432eff100/original",
+    "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/e34cef2b-f80c-482a-48fa-0b1788a67200/original"
+  ],
+  "recast_by": {
+    "username": "vortac",
+    "displayname": "tim/vortac",
+    "fid": 209586,
+    "avatar": "https://i.imgur.com/TKcfxSt.png",
+    "description": "Hosts /the-library — Moderates /gen-art /deca /newmasters\n— Designs graphics + UI / Crafts code + technology / Collects art / Loves books / Builds community"
+  },
+  "recast_hash": "0x71b3794a987aec0d101a3d2dea9ca446ee1fd22f"
+}
