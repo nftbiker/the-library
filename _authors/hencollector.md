@@ -5,5 +5,4 @@ fid: 249396
 profile: https://farcaster.xyz/hencollector
 avatar: https://i.imgur.com/ScmjCwT.gif
 ---
-
-Collector-ing. a diary.
+Collector-ing. a diary.  
