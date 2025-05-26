@@ -2,7 +2,8 @@
 username: sermad
 displayname: Sermad
 fid: 262460
-profile: https://warpcast.com/sermad
+profile: https://farcaster.xyz/sermad
 avatar: https://i.imgur.com/HuoIrrQ.jpg
 ---
-Not sure.  
+
+Not sure.

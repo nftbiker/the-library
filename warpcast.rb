@@ -21,7 +21,7 @@ JSON_PATH = "./_json"
 MD_PATH = "./_posts"
 AUTH_PATH = "./_authors"
 TIME_FMT = "%Y-%m-%dT%H:%M:%S%z"
-CHANNEL_URL = "https://warpcast.com/~/channel/#{CHANNEL_ID}"
+CHANNEL_URL = "https://farcaster.xyz/~/channel/#{CHANNEL_ID}"
 PINATA_URL = "https://hub.pinata.cloud/v1"
 PINATA_ORIGIN_TS = 1609455600 # 2021-01-01 00:00:00 +0100
 
@@ -243,7 +243,7 @@ class Warpcast
       front << "username: #{author["username"]}"
       front << "displayname: #{author["displayname"]}"
       front << "fid: #{author["fid"]}"
-      front << "profile: https://warpcast.com/#{author["username"]}"
+      front << "profile: https://farcaster.xyz/#{author["username"]}"
       front << "avatar: #{author["avatar"]}" if author["avatar"]
       front << "---"
       front << ""
@@ -290,13 +290,13 @@ class Warpcast
     front << "username: #{author["username"]}"
     front << "fid: #{author["fid"]}"
     front << "cast_id: #{entry["id"]}"
-    front << "cast: https://warpcast.com/#{author["username"]}/#{id}"
+    front << "cast: https://farcaster.xyz/#{author["username"]}/#{id}"
     front << "image: #{img}"
     unless entry["recast_hash"].blank?
       author = entry["recast_by"]
       front << "recast_author: #{author["displayname"]}"
       front << "recast_username: #{author["username"]}"
-      front << "recast_hash: https://warpcast.com/#{author["username"]}/#{entry["recast_hash"].to_s[0, 10]}"
+      front << "recast_hash: https://farcaster.xyz/#{author["username"]}/#{entry["recast_hash"].to_s[0, 10]}"
     end
     front << "layout: post"
     front << "---"
@@ -319,7 +319,7 @@ class Warpcast
 
   def retrieve(from = nil)
     from ||= Time.now.to_i * 1000
-    api = RestClient.post("https://client.warpcast.com/v2/feed-items", {
+    api = RestClient.post("https://client.farcaster.xyz/v2/feed-items", {
       feedKey: CHANNEL_ID,
       feedType: "default",
       viewedCastHashes: "",

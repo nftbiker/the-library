@@ -1,6 +1,6 @@
 # About
 
-A ruby script to download all entries from ["The Library" warpcast channel](https://warpcast.com/~/channel/the-library) and keep a copy in json and markdown format. The script is automatically run through a github actions to update the repository with new posts, twice a day.
+A ruby script to download all entries from ["The Library" warpcast channel](https://farcaster.xyz/~/channel/the-library) and keep a copy in json and markdown format. The script is automatically run through a github actions to update the repository with new posts, twice a day.
 
 # Preview
 

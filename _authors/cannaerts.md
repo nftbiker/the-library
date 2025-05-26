@@ -1,8 +1,7 @@
 ---
 username: cannaerts
-displayname: Corneel Cannaerts 
+displayname: Corneel Cannaerts
 fid: 248303
-profile: https://warpcast.com/cannaerts
+profile: https://farcaster.xyz/cannaerts
 avatar: https://i.imgur.com/e7k7JCU.jpg
 ---
-  

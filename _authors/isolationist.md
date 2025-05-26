@@ -2,7 +2,8 @@
 username: isolationist
 displayname: Isolationist
 fid: 416898
-profile: https://warpcast.com/isolationist
+profile: https://farcaster.xyz/isolationist
 avatar: https://i.imgur.com/hYMPEma.jpg
 ---
-Dispassion // https://linktr.ee/theisolationist  
+
+Dispassion // https://linktr.ee/theisolationist

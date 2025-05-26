@@ -16,7 +16,7 @@ post_class: post-template
             {% if author %}
                 <a href="{{ author.url | prepend: site.baseurl | prepend: site.url }}">{{ author.displayname }}</a>
             {% else %}
-                <a href="https://warpcast.com/{{page.username}}" target="_blank">{{ page.author }}</a>
+                <a href="https://farcaster.xyz/{{page.username}}" target="_blank">{{ page.author }}</a>
             {% endif %}
      on
         <a href="{{page.cast}}" target="_blank"><span class="post-date"><time class="post-date" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time></span></a>

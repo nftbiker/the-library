@@ -2,7 +2,7 @@
 name: "The Library Backup"
 title: "The Library"
 description: >-
-  This is a backup of all books posted (with an image) into <a href="https://warpcast.com/~/channel/the-library" target="_blank">The Library</a> channel.
+  This is a backup of all books posted (with an image) into <a href="https://farcaster.xyz/~/channel/the-library" target="_blank">The Library</a> channel.
 logo: "assets/library.png"
 # favicon: 'assets/images/logo.png'
 baseurl: ""

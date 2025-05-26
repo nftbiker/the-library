@@ -2,7 +2,8 @@
 username: annawolf
 displayname: Anna Wolf
 fid: 244832
-profile: https://warpcast.com/annawolf
+profile: https://farcaster.xyz/annawolf
 avatar: https://i.imgur.com/e0oYvmX.jpg
 ---
-exploring the intersection of art & economics | genart curation & advisory | founding member of tender.art | host of /gen-tex | also generative embroidery 🪡  
+
+exploring the intersection of art & economics | genart curation & advisory | founding member of tender.art | host of /gen-tex | also generative embroidery 🪡

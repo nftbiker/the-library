@@ -2,7 +2,8 @@
 username: hencollector
 displayname: h=ncollector
 fid: 249396
-profile: https://warpcast.com/hencollector
+profile: https://farcaster.xyz/hencollector
 avatar: https://i.imgur.com/ScmjCwT.gif
 ---
-Collector-ing. a diary.  
+
+Collector-ing. a diary.
