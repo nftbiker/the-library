@@ -1,0 +1,23 @@
+{
+  "id": "0x1ffa3a84b846ab72de5b32e5b9523baa8e635484",
+  "timestamp": 1751994363000,
+  "author": {
+    "username": "v3ga",
+    "displayname": "Julien Gachadoat",
+    "fid": 252572,
+    "avatar": "https://i.imgur.com/qbAHP5q.jpg",
+    "description": "Generative artist based in Bordeaux (FR)"
+  },
+  "text": "Awesome resources (articles, photos, events, documents) about \"Group of Art and Informatique of Vincennes\".\n\nhttps://artinfo-musinfo.org/en/index.html",
+  "images": [
+    "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/03df823e-6794-49d4-320e-7ea69dff5800/original"
+  ],
+  "recast_by": {
+    "username": "marcelonada",
+    "displayname": "Marcelo Terça-Nada 💎🎩✨",
+    "fid": 330083,
+    "avatar": "https://i.imgur.com/dZCteUV.jpg",
+    "description": "Brazilian artist & collector\n・Portfolio, published books, genart projects, tutorials, starter packs etc: https://linktr.ee/marcelonada"
+  },
+  "recast_hash": "0xb5c2760d08369d7fc9a46d871bf2c6b91ec894bb"
+}
