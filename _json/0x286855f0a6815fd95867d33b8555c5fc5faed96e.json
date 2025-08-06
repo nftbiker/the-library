@@ -1,0 +1,15 @@
+{
+  "id": "0x286855f0a6815fd95867d33b8555c5fc5faed96e",
+  "timestamp": 1754475936000,
+  "author": {
+    "username": "paul-prudence",
+    "displayname": "Paul Prudence",
+    "fid": 307224,
+    "avatar": "https://i.imgur.com/1wOpavr.jpg",
+    "description": "Artist/Writer /the-library /geoblocks ✷ https://linktr.ee/paulprudence ✷ Live: ISO/IEC 10646 ⟶  https://verse.works/series/iso-iec-10646-by-paul-prudence"
+  },
+  "text": "10 PRINT CHR$(205.5+RND(1))\nNick Montfort, Patsy Baudoin, John Bell, Ian Bogost\nJeremy Douglass, Mark C. Marino, Michael Mateas\nCasey Reas, Mark Sample, and Noah Vawter\n\n'10 PRINT is a book about a one-line Commodore 64 BASIC program, published in 2012. \n\nRealising that @vortac's masterpiece in /geoblocks on Monday reminded me so much of the patterns in 10 PRINT, I wondered if anyone had added this book to the /the-library Hey, even if they did, here's the reminder :)\n\nPDF >> https://10print.org/10_PRINT_121114.pdf\n\n@vortac's piece >> https://farcaster.xyz/vortac/0xe2260058\n\nGOTO 10",
+  "images": [
+    "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/b4afd380-4589-4470-8f8f-223bcf87ae00/original"
+  ]
+}
