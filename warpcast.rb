@@ -324,7 +324,6 @@ class Warpcast
     from ||= Time.now.to_i * 1000
     params = { content_type: :json, accept: :json }
     params[:Authorization] = "Bearer #{ENV["WC_KEY"]}" unless ENV["WC_KEY"].blank?
-    pp params
     api = RestClient.post("https://client.farcaster.xyz/v2/feed-items", {
       feedKey: CHANNEL_ID,
       feedType: "default",
