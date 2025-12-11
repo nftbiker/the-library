@@ -12,6 +12,9 @@ end
 
 require "active_support/all"
 require "json"
+require "dotenv"
+
+Dotenv.load
 
 # change this to backup another channel
 CHANNEL_ID = ENV["CHANNEL_ID"] || "the-library"
@@ -319,14 +322,16 @@ class Warpcast
 
   def retrieve(from = nil)
     from ||= Time.now.to_i * 1000
+    params = { content_type: :json, accept: :json }
+    params[:Authorization] = "Bearer #{ENV["WC_KEY"]}" unless ENV["WC_KEY"].blank?
+    pp params
     api = RestClient.post("https://client.farcaster.xyz/v2/feed-items", {
       feedKey: CHANNEL_ID,
       feedType: "default",
-      viewedCastHashes: "",
       updateState: true,
       latestMainCastTimestamp: from,
       olderThan: from,
-    }.to_json, { content_type: :json, accept: :json })
+    }.to_json, params)
 
     data = JSON.parse(api.body)
     (data["result"] || {})["items"] || []
