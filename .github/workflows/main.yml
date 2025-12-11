@@ -25,6 +25,8 @@ jobs:
       - name: Run script
         run: |
           ruby ./warpcast.rb
+        env:
+          WC_KEY: ${{secrets.WC_KEY}}
 
       - name: Check for changes
         id: check_changes
