@@ -2,7 +2,7 @@ name: Update library archive
 
 on:
   schedule:
-    - cron: "35 */4 * * *" # Runs every 4 hours
+    - cron: "35 4 * * *" # Runs every day at 4:35 AM
   workflow_dispatch:
 
 jobs:
