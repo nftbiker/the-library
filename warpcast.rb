@@ -24,9 +24,13 @@ JSON_PATH = "./_json"
 MD_PATH = "./_posts"
 AUTH_PATH = "./_authors"
 TIME_FMT = "%Y-%m-%dT%H:%M:%S%z"
-CHANNEL_URL = "https://farcaster.xyz/~/channel/#{CHANNEL_ID}"
-PINATA_URL = "https://hub.pinata.cloud/v1"
-PINATA_ORIGIN_TS = 1609455600 # 2021-01-01 00:00:00 +0100
+# parent url used by casts of the channel (kept its historical warpcast.com form)
+CHANNEL_URL = ENV["CHANNEL_URL"] || "https://warpcast.com/~/channel/#{CHANNEL_ID}"
+# public Snapchain node (Hub HTTP API), no key needed
+HUB_URL = ENV["HUB_URL"] || "https://crackle.farcaster.xyz:3381/v1"
+HUB_PAGE_SIZE = 100
+FARCASTER_EPOCH = 1609459200 # 2021-01-01 00:00:00 UTC
+IMAGE_REGEX = /imagedelivery\.net|imgur\.com|postimg\.cc|supercast\.mypinata|\.(png|jpe?g|gif|webp)/im
 
 class Warpcast
   attr_accessor :casts
@@ -42,56 +46,28 @@ class Warpcast
     FileUtils.mkdir_p(AUTH_PATH) unless File.exist?(AUTH_PATH)
   end
 
+  # fetch channel casts from the hub, newest first
+  # options:
+  #   days:  how many days back to process (default 7), :all for the whole channel
+  #   force: rewrite json/markdown files that already exist
   def call(options = {})
-    upto = (options[:days] || 2).days.ago.beginning_of_day.to_i
-    puts "Process casts older from #{options[:from] ? Time.at(options[:from] / 1000).to_s : "now"}"
-    list = retrieve(options[:from])
-    list.each do |item|
-      next if item["pinned"]
-      cast = item["cast"]
+    days = options[:days] || 7
+    upto = days == :all ? 0 : days.days.ago.beginning_of_day.to_i
+    puts "Process casts since #{upto.zero? ? "the beginning" : Time.at(upto)}"
 
-      images = get_images_from(cast)
-      if images.blank?
-        # is it a recast?
-        recasts = (cast["embeds"] || {})["casts"] || []
-        unless recasts.blank?
-          other = recasts.detect { |e| !e["embeds"].blank? && !e["embeds"]["images"].blank? }
-          if other
-            other["recast_by"] = get_profile_from(cast["author"])
-            other["recast_hash"] = cast["hash"]
-            cast = other
-          end
-        end
-        images = get_images_from(cast)
-      end
-      # no image, no love
-      next if images.blank?
+    results = []
+    each_channel_cast do |data|
+      cast = data["data"]
+      timestamp = cast["timestamp"] + FARCASTER_EPOCH
+      break if timestamp < upto
 
-      # what we memoize
-      res = {
-        id: cast["hash"],
-        timestamp: cast["timestamp"],
-        author: get_profile_from(cast["author"]),
-        text: cast["text"],
-        images: images,
-      }
-      if cast["recast_by"]
-        res[:recast_by] = cast["recast_by"]
-        res[:recast_hash] = cast["recast_hash"]
-      end
-      res.stringify_keys!
-      save_json(res, options[:force])
-      save_markdown(res, options[:force])
-      casts[res["id"]] = res
+      res = parse_cast(data, timestamp, options[:force])
+      results << res if res
     end
 
-    if list.size >= 15
-      from = list.last["timestamp"]
-      if from != options[:from] && from / 1000 > upto
-        return call(options.merge(from: from))
-      end
-    end
-    store_authors
+    puts "#{results.size} new cast(s) with images"
+    fix_authors(results.map { |r| r["author"]["fid"] }.uniq, results)
+    casts.merge!(results.index_by { |r| r["id"] })
   end
 
   def reprocess
@@ -104,51 +80,42 @@ class Warpcast
     store_authors
   end
 
-  # retrieve everything (or only recent casts) from Hub API
-  # https://docs.farcaster.xyz/reference/hubble/httpapi/casts
-  # data are not in the same format as warpcast API but are enough for our need
-  # on pinata, the timestamp is weird (not true epoch)
-  def archives(recent = false)
-    url = File.join(PINATA_URL, "/castsByParent").to_s
-    url += "?url=#{CHANNEL_URL}"
-    url += "&reverse=1&pageSize=#{recent.class == Integer ? recent : 100}" if recent
-    api = RestClient.get(url, { content_type: :json, accept: :json })
-    body = JSON.parse(api.body)
+  # iterate over every cast of the channel through the Hub HTTP API
+  # https://snapchain.farcaster.xyz/reference/httpapi/casts
+  def each_channel_cast
+    page_token = nil
+    loop do
+      params = { url: CHANNEL_URL, pageSize: HUB_PAGE_SIZE, reverse: true }
+      params[:pageToken] = page_token if page_token
+      body = hub_get("castsByParent", params)
+      (body["messages"] || []).each { |data| yield data }
+      page_token = body["nextPageToken"]
+      break if page_token.blank?
+    end
+  end
 
-    authors = {}
-    results = []
+  # convert a hub message into what we memoize, nil if it must be ignored
+  def parse_cast(data, timestamp, force = false)
+    cast = data["data"]
+    return if cast["type"] != "MESSAGE_TYPE_CAST_ADD"
+    return if !force && json_exist?(data["hash"])
 
-    body["messages"].each do |data|
-      cast = data["data"]
-      authors[cast["fid"]] = true
-
-      next if cast["type"] != "MESSAGE_TYPE_CAST_ADD"
-      next if json_exist?(data["hash"])
-
-      msg = cast["castAddBody"]
-      embeds = msg["embeds"].map { |e| e["url"] }.compact
-      images = embeds.select { |e| e.match(/imagedelivery\.net|imgur\.com|postimg\.cc|supercast\.mypinata|\.(png|jpe?g|gif)/im) }
-      if images.blank? && !embeds.blank?
-        puts "Ignore #{data["hash"]} - Empty image : #{embeds}"
-        next
-      end
-      next if images.blank?
-
-      # what we memoize
-      res = {
-        id: data["hash"],
-        timestamp: (cast["timestamp"] + PINATA_ORIGIN_TS) * 1000,
-        author: {
-          fid: cast["fid"],
-        }.stringify_keys,
-        text: msg["text"],
-        images: images,
-      }
-      res.stringify_keys!
-      results.push(res)
+    msg = cast["castAddBody"]
+    embeds = (msg["embeds"] || []).map { |e| e["url"] }.compact
+    images = embeds.select { |e| e.match(IMAGE_REGEX) }
+    # no image, no love
+    if images.blank?
+      puts "Ignore #{data["hash"]} - no image : #{embeds}" unless embeds.blank?
+      return
     end
 
-    fix_authors(authors.keys, results)
+    {
+      "id" => data["hash"],
+      "timestamp" => timestamp * 1000,
+      "author" => { "fid" => cast["fid"] },
+      "text" => msg["text"].to_s,
+      "images" => images,
+    }
   end
 
   def fix_authors(missing_ids = [], results = [])
@@ -180,16 +147,6 @@ class Warpcast
 
   private
 
-  def get_profile_from(author)
-    {
-      username: author["username"].to_s.strip,
-      displayname: author["displayName"].to_s.strip,
-      fid: author["fid"],
-      avatar: author["pfp"]["url"],
-      description: author["profile"]["bio"]["text"],
-    }.stringify_keys
-  end
-
   def authors_infos(author_ids)
     list = get_authors
     author_ids.each do |fid|
@@ -202,13 +159,9 @@ class Warpcast
   end
 
   def get_author(fid)
-    url = File.join(PINATA_URL, "/userDataByFid").to_s
-    url += "?fid=#{fid}"
-    api = RestClient.get(url, { content_type: :json, accept: :json })
-
-    data = JSON.parse(api.body)["messages"].collect do |e|
+    data = (hub_get("userDataByFid", fid: fid)["messages"] || []).collect do |e|
       (e["data"] || {})["userDataBody"]
-    end.inject({}) do |hsh, e|
+    end.compact.inject({}) do |hsh, e|
       k = e["type"].to_s.gsub(/USER_DATA_TYPE_/im, "").downcase
       hsh[k] = e["value"] unless k.blank?
       hsh
@@ -257,13 +210,6 @@ class Warpcast
       end
     end
     true
-  end
-
-  def get_images_from(cast)
-    ((cast["embeds"] || {})["images"] || []).collect { |e|
-      next if e["type"] != "image"
-      (e["media"] || {})["staticRaster"] || e["url"] || e["sourceUrl"]
-    }.compact
   end
 
   def json_exist?(hash)
@@ -320,23 +266,41 @@ class Warpcast
     url.gsub(/\.jpg/im, ".jpeg")
   end
 
-  def retrieve(from = nil)
-    from ||= Time.now.to_i * 1000
-    params = { content_type: :json, accept: :json }
-    params[:Authorization] = "Bearer #{ENV["WC_KEY"]}" unless ENV["WC_KEY"].blank?
-    api = RestClient.post("https://client.farcaster.xyz/v2/feed-items", {
-      feedKey: CHANNEL_ID,
-      feedType: "default",
-      updateState: true,
-      latestMainCastTimestamp: from,
-      olderThan: from,
-    }.to_json, params)
-
-    data = JSON.parse(api.body)
-    (data["result"] || {})["items"] || []
+  def hub_get(endpoint, params = {})
+    url = "#{HUB_URL}/#{endpoint}?#{URI.encode_www_form(params)}"
+    attempts = 0
+    begin
+      api = RestClient.get(url, { accept: :json })
+      JSON.parse(api.body)
+    rescue RestClient::Exception, Errno::ECONNRESET, Net::OpenTimeout, Net::ReadTimeout => e
+      attempts += 1
+      raise if attempts >= 3
+      puts "Retry #{url} (#{e.message})"
+      sleep(2 * attempts)
+      retry
+    end
   end
 end
 
 if $0 == __FILE__
-  Warpcast.new.call
+  require "optparse"
+
+  options = {}
+  OptionParser.new do |opts|
+    opts.banner = "Usage: ruby warpcast.rb [options]"
+    opts.on("-d", "--days DAYS", "Number of days to fetch (default 2), or 'all' for the whole channel") do |v|
+      if v == "all"
+        options[:days] = :all
+      elsif v.match?(/\A\d+\z/) && v.to_i > 0
+        options[:days] = v.to_i
+      else
+        abort "Invalid --days value: #{v} (expected a positive integer or 'all')"
+      end
+    end
+    opts.on("-f", "--force", "Rewrite json/markdown files that already exist") do
+      options[:force] = true
+    end
+  end.parse!
+
+  Warpcast.new.call(options)
 end

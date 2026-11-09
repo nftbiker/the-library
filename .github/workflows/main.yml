@@ -13,8 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Setup ruby version
-        # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-        # change this to (see https://github.com/ruby/setup-ruby#versioning):
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.1"
@@ -25,8 +23,6 @@ jobs:
       - name: Run script
         run: |
           ruby ./warpcast.rb
-        env:
-          WC_KEY: ${{secrets.WC_KEY}}
 
       - name: Check for changes
         id: check_changes
